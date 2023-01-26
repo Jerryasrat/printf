@@ -1,7 +1,10 @@
 #include "main.h"
+#include <stdlib.h>
 /**
  * _printf - Printf function
  * @format: format.
+ * @buffer: Array of chars                                                  
+ * @buff_ind: Index at which to add next char, represents the length.
  * Return: Printed chars.
  */
 int _printf(const char *format, ...)
@@ -10,6 +13,7 @@ int _printf(const char *format, ...)
 	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
+	print_buffer(buffer, &buff_ind);
 
 	if (format == NULL)
 		return (-1);
@@ -19,7 +23,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			buffer[buff_ind++] = format[i];
+			print_buffer(buff_ind++) = format[i];
 			if (buff_ind == BUFF_SIZE)
 				print_buffer(buffer, &buff_ind);
 			printed_chars++;
